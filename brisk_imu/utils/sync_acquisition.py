@@ -21,13 +21,13 @@ if(len(sys.argv)==2):
                     headers_imu = [imu+"_"+h for h in headers]
                     data[imu] = pd.read_csv('imus_'+acq+"_"+imu+".csv",header=None)
                     data[imu].columns = headers_imu
-                first_t = np.min([val.iloc[0,0] for val in data.values()])
+                first_t = np.max([val.iloc[0,0] for val in data.values()])
                 for imu in imus:
                     data[imu] = data[imu][data[imu].iloc[:,0]>=first_t]
                 lengths = np.min([val.shape[0] for val in data.values()])
-                t = data[imus[0]].iloc[:,0]
                 for imu in imus:
                     data[imu] = data[imu].iloc[:lengths,1:]
+                t = data[imus[0]].iloc[:lengths,0]
                 data_all = pd.concat([d for d in data.values()],axis=1)
                 data_all['t'] = t
                 data_all.to_csv(outFilename,index=None)
