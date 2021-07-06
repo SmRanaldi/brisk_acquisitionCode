@@ -36,6 +36,14 @@
     <Reference Include="MathNet.Numerics">
       <HintPath>..\..\shimmer_c#\Shimmer-C-API\ShimmerAPI\ShimmerAPI\bin\ShimmerAPI\MathNet.Numerics.dll</HintPath>
     </Reference>
+    <Reference Include="NationalInstruments.Common, Version=19.1.40.49152, Culture=neutral, PublicKeyToken=dc6ad606294fc298, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\National Instruments\Measurement Studio\DotNET\v4.0\AnyCPU\NationalInstruments.Common 19.1.40\NationalInstruments.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="NationalInstruments.DAQmx, Version=20.7.45.49302, Culture=neutral, PublicKeyToken=4febd62461bf11a4, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\National Instruments\MeasurementStudioVS2012\DotNET\Assemblies\20.7.45.49302\NationalInstruments.DAQmx.dll</HintPath>
+    </Reference>
     <Reference Include="ShimmerAPI">
       <HintPath>..\..\shimmer_c#\Shimmer-C-API\ShimmerAPI\ShimmerAPI\bin\ShimmerAPI\ShimmerAPI.dll</HintPath>
     </Reference>
@@ -59,6 +67,7 @@
     <Compile Include="AddSensorForm.Designer.cs">
       <DependentUpon>AddSensorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NiDAQTrigger.cs" />
     <Compile Include="ShimmerNetwork.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

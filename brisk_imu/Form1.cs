@@ -1,11 +1,10 @@
-﻿using System;
+﻿using ShimmerAPI;
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Windows.Forms;
 using System.Reflection;
-
-using ShimmerAPI;
+using System.Windows.Forms;
 
 namespace brisk_imu
 {
@@ -27,6 +26,7 @@ namespace brisk_imu
 
         // Sensors
         private ShimmerNetwork _imus;
+        private NiDAQTrigger _niTrigger;
 
         public Form1()
         {
@@ -48,11 +48,21 @@ namespace brisk_imu
                     _imus.AddSensor(ID);
                 }
                 _imus.Initialize();
+                if (triggerCB.Checked)
+                {
+                    _niTrigger = new NiDAQTrigger(niDeviceTB.Text, niPortTB.Text);
+                    triggerCB.Enabled = false;
+                    _niTrigger.Initialize();
+                }
                 _isConnectionOK = true;
             }
             else
             {
                 _imus.Disconnect();
+                if (triggerCB.Checked)
+                {
+                    triggerCB.Enabled = true;
+                }
                 _isConnectionOK = false;
 
             }
@@ -63,6 +73,7 @@ namespace brisk_imu
                 AddBtn.Enabled = false;
                 RemoveBtn.Enabled = false;
                 shimmerListBox.Enabled = false;
+                triggerGB.Enabled = false;
             }
             else
             {
@@ -71,6 +82,7 @@ namespace brisk_imu
                 AddBtn.Enabled = true;
                 RemoveBtn.Enabled = true;
                 shimmerListBox.Enabled = true;
+                triggerGB.Enabled = true;
             }
         }
 
@@ -91,6 +103,10 @@ namespace brisk_imu
                     _imus.SetFilename(imuFilename);
                 }
                 _imus.Start();
+                if (triggerCB.Checked)
+                {
+                    _niTrigger.Start();
+                }
                 _isStarted = true;
                 startBtn.BackColor = Color.Crimson;
                 startBtn.Text = "Stop";
@@ -102,6 +118,10 @@ namespace brisk_imu
             }
             else
             {
+                if (triggerCB.Checked)
+                {
+                    _niTrigger.Stop();
+                }
                 _imus.Stop();
                 _isStarted = false;
                 syncFcn();
@@ -180,6 +200,12 @@ namespace brisk_imu
                 sw.WriteLine("conda activate base");
                 sw.WriteLine("python " + pyFile + " " + cmdText);
             }
+        }
+
+        private void triggerCB_CheckedChanged(object sender, EventArgs e)
+        {
+            niDeviceTB.Enabled = !triggerCB.Checked;
+            niPortTB.Enabled = !triggerCB.Checked;
         }
     }
 }
