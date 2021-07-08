@@ -29,7 +29,7 @@ namespace brisk_imu
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.startBtn = new System.Windows.Forms.Button();
             this.ConnectBtn = new System.Windows.Forms.Button();
@@ -41,16 +41,21 @@ namespace brisk_imu
             this.updateFilenameButton = new System.Windows.Forms.Button();
             this.syncBtn = new System.Windows.Forms.Button();
             this.imuBox = new System.Windows.Forms.GroupBox();
+            this.triggerCB = new System.Windows.Forms.CheckBox();
+            this.niDeviceTB = new System.Windows.Forms.TextBox();
+            this.triggerGB = new System.Windows.Forms.GroupBox();
+            this.niPortTB = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.imuBox.SuspendLayout();
+            this.triggerGB.SuspendLayout();
             this.SuspendLayout();
             // 
             // chart1
             // 
-            chartArea1.AxisX.MajorGrid.Enabled = false;
-            chartArea1.AxisY.MajorGrid.Enabled = false;
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
+            chartArea2.AxisX.MajorGrid.Enabled = false;
+            chartArea2.AxisY.MajorGrid.Enabled = false;
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
             this.chart1.Location = new System.Drawing.Point(12, 12);
             this.chart1.Name = "chart1";
             this.chart1.Size = new System.Drawing.Size(401, 253);
@@ -61,7 +66,7 @@ namespace brisk_imu
             // 
             this.startBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(255)))), ((int)(((byte)(64)))));
             this.startBtn.Enabled = false;
-            this.startBtn.Location = new System.Drawing.Point(555, 326);
+            this.startBtn.Location = new System.Drawing.Point(609, 326);
             this.startBtn.Name = "startBtn";
             this.startBtn.Size = new System.Drawing.Size(107, 37);
             this.startBtn.TabIndex = 1;
@@ -71,7 +76,7 @@ namespace brisk_imu
             // 
             // ConnectBtn
             // 
-            this.ConnectBtn.Location = new System.Drawing.Point(475, 326);
+            this.ConnectBtn.Location = new System.Drawing.Point(529, 326);
             this.ConnectBtn.Name = "ConnectBtn";
             this.ConnectBtn.Size = new System.Drawing.Size(74, 37);
             this.ConnectBtn.TabIndex = 2;
@@ -112,7 +117,7 @@ namespace brisk_imu
             // SaveCheckBox
             // 
             this.SaveCheckBox.AutoSize = true;
-            this.SaveCheckBox.Location = new System.Drawing.Point(418, 346);
+            this.SaveCheckBox.Location = new System.Drawing.Point(472, 346);
             this.SaveCheckBox.Name = "SaveCheckBox";
             this.SaveCheckBox.Size = new System.Drawing.Size(51, 17);
             this.SaveCheckBox.TabIndex = 6;
@@ -151,18 +156,58 @@ namespace brisk_imu
             this.imuBox.Controls.Add(this.RemoveBtn);
             this.imuBox.Controls.Add(this.AddBtn);
             this.imuBox.Controls.Add(this.shimmerListBox);
-            this.imuBox.Location = new System.Drawing.Point(526, 19);
+            this.imuBox.Location = new System.Drawing.Point(580, 19);
             this.imuBox.Name = "imuBox";
             this.imuBox.Size = new System.Drawing.Size(136, 246);
             this.imuBox.TabIndex = 10;
             this.imuBox.TabStop = false;
             this.imuBox.Text = "IMU";
             // 
+            // triggerCB
+            // 
+            this.triggerCB.AutoSize = true;
+            this.triggerCB.Location = new System.Drawing.Point(35, 89);
+            this.triggerCB.Name = "triggerCB";
+            this.triggerCB.Size = new System.Drawing.Size(65, 17);
+            this.triggerCB.TabIndex = 11;
+            this.triggerCB.Text = "Enabled";
+            this.triggerCB.UseVisualStyleBackColor = true;
+            this.triggerCB.CheckedChanged += new System.EventHandler(this.triggerCB_CheckedChanged);
+            // 
+            // niDeviceTB
+            // 
+            this.niDeviceTB.Location = new System.Drawing.Point(35, 34);
+            this.niDeviceTB.Name = "niDeviceTB";
+            this.niDeviceTB.Size = new System.Drawing.Size(65, 20);
+            this.niDeviceTB.TabIndex = 12;
+            this.niDeviceTB.Text = "Dev1";
+            // 
+            // triggerGB
+            // 
+            this.triggerGB.Controls.Add(this.niPortTB);
+            this.triggerGB.Controls.Add(this.niDeviceTB);
+            this.triggerGB.Controls.Add(this.triggerCB);
+            this.triggerGB.Location = new System.Drawing.Point(459, 19);
+            this.triggerGB.Name = "triggerGB";
+            this.triggerGB.Size = new System.Drawing.Size(106, 112);
+            this.triggerGB.TabIndex = 13;
+            this.triggerGB.TabStop = false;
+            this.triggerGB.Text = "Trigger";
+            // 
+            // niPortTB
+            // 
+            this.niPortTB.Location = new System.Drawing.Point(35, 60);
+            this.niPortTB.Name = "niPortTB";
+            this.niPortTB.Size = new System.Drawing.Size(65, 20);
+            this.niPortTB.TabIndex = 13;
+            this.niPortTB.Text = "1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(674, 375);
+            this.ClientSize = new System.Drawing.Size(728, 375);
+            this.Controls.Add(this.triggerGB);
             this.Controls.Add(this.imuBox);
             this.Controls.Add(this.syncBtn);
             this.Controls.Add(this.updateFilenameButton);
@@ -175,6 +220,8 @@ namespace brisk_imu
             this.Text = "BRISK Data Acquisition";
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.imuBox.ResumeLayout(false);
+            this.triggerGB.ResumeLayout(false);
+            this.triggerGB.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -193,6 +240,10 @@ namespace brisk_imu
         private System.Windows.Forms.Button updateFilenameButton;
         private System.Windows.Forms.Button syncBtn;
         private System.Windows.Forms.GroupBox imuBox;
+        private System.Windows.Forms.CheckBox triggerCB;
+        private System.Windows.Forms.TextBox niDeviceTB;
+        private System.Windows.Forms.GroupBox triggerGB;
+        private System.Windows.Forms.TextBox niPortTB;
     }
 }
 

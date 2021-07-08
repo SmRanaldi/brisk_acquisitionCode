@@ -25,9 +25,10 @@ if(len(sys.argv)==2):
                 for imu in imus:
                     data[imu] = data[imu][data[imu].iloc[:,0]>=first_t]
                 lengths = np.min([val.shape[0] for val in data.values()])
+                t = data[imus[0]].iloc[:lengths,0]
                 for imu in imus:
                     data[imu] = data[imu].iloc[:lengths,1:]
-                t = data[imus[0]].iloc[:lengths,0]
+                    data[imu].reset_index(inplace=True,drop=True)
                 data_all = pd.concat([d for d in data.values()],axis=1)
                 data_all['t'] = t
                 data_all.to_csv(outFilename,index=None)

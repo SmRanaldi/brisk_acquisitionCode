@@ -17,3 +17,8 @@ C:\Users\smran\OneDrive - Universita degli Studi Roma Tre\Simone\Codes\C#\brisk_
 C:\Users\smran\OneDrive - Universita degli Studi Roma Tre\Simone\Codes\C#\brisk_imu\brisk_imu\obj\Debug\brisk_imu.exe
 C:\Users\smran\OneDrive - Universita degli Studi Roma Tre\Simone\Codes\C#\brisk_imu\brisk_imu\obj\Debug\brisk_imu.pdb
 C:\Users\smran\OneDrive - Universita degli Studi Roma Tre\Simone\Codes\C#\brisk_imu\brisk_imu\obj\Debug\brisk_imu.AddSensorForm.resources
+C:\Users\smran\OneDrive - Universita degli Studi Roma Tre\Simone\Codes\C#\brisk_imu\brisk_imu\bin\Debug\NationalInstruments.Common.dll
+C:\Users\smran\OneDrive - Universita degli Studi Roma Tre\Simone\Codes\C#\brisk_imu\brisk_imu\bin\Debug\NationalInstruments.DAQmx.dll
+C:\Users\smran\OneDrive - Universita degli Studi Roma Tre\Simone\Codes\C#\brisk_imu\brisk_imu\bin\Debug\NationalInstruments.Common.xml
+C:\Users\smran\OneDrive - Universita degli Studi Roma Tre\Simone\Codes\C#\brisk_imu\brisk_imu\bin\Debug\NationalInstruments.DAQmx.xml
+C:\Users\smran\OneDrive - Universita degli Studi Roma Tre\Simone\Codes\C#\brisk_imu\brisk_imu\obj\Debug\brisk_imu.exe.config
