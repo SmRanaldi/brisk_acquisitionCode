@@ -96,6 +96,7 @@ namespace brisk_imu
                         sh.writeRealWorldClock(); // Explicitely sets the real world clock
                         Console.WriteLine("Shimmer " + sh.GetDeviceName() + " connected.");
                         c = 10;
+                        sh.StartStreaming();
                     }
                     else
                     {
@@ -109,10 +110,6 @@ namespace brisk_imu
 
         public override void Start()
         {
-            foreach (ShimmerLogAndStream32Feet sh in _shimmerList)
-            {
-                sh.StartStreaming();
-            }
             Console.WriteLine("Acquisition started.");
             _isRunning = true;
         }
@@ -123,7 +120,6 @@ namespace brisk_imu
             foreach (ShimmerLogAndStream32Feet sh in _shimmerList)
             {
                 string id = sh.GetDeviceName();
-                sh.StopStreaming();
                 
                 if (_outputFilename != null)
                 {
@@ -146,6 +142,7 @@ namespace brisk_imu
             }
             foreach (ShimmerLogAndStream32Feet sh in _shimmerList)
             {
+                sh.StopStreaming();
                 sh.Disconnect();
             }
             _shimmerList.Clear();
