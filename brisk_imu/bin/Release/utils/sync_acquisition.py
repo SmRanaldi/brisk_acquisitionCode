@@ -25,7 +25,8 @@ if(len(sys.argv)==2):
                 for imu in imus:
                     data[imu] = data[imu][data[imu].iloc[:,0]>=first_t]
                 lengths = np.min([val.shape[0] for val in data.values()])
-                t = data[imus[0]].iloc[:lengths,0]
+                t = data[imus[0]].iloc[:lengths,0].copy(deep=True)
+                t.reset_index(inplace=True,drop=True)
                 for imu in imus:
                     data[imu] = data[imu].iloc[:lengths,1:]
                     data[imu].reset_index(inplace=True,drop=True)
