@@ -39,8 +39,7 @@ namespace brisk_imu
 
             _imus = new ShimmerNetwork(_enabledSensors, 102.4f, chart1);
 
-            dynamic _init_imu = JsonConvert.DeserializeObject(File.ReadAllText(_baseExePath+"\\settings\\imu_configs.json"));
-
+            fetch_config();
         }
 
         private void ConnectBtn_Click(object sender, EventArgs e)
@@ -204,6 +203,14 @@ namespace brisk_imu
                 sw.WriteLine("conda activate base");
                 sw.WriteLine("python " + pyFile + " " + cmdText);
             }
+        }
+
+        private void fetch_config()
+        {
+            dynamic _init_imu = JsonConvert.DeserializeObject(File.ReadAllText(_baseExePath + "\\settings\\imu_configs.json"));
+            shimmerListBox.Items.Add(_init_imu.trunk);
+            shimmerListBox.Items.Add(_init_imu.arm);
+            shimmerListBox.Items.Add(_init_imu.forearm);
         }
 
         private void triggerCB_CheckedChanged(object sender, EventArgs e)
