@@ -167,6 +167,12 @@ namespace brisk_imu
             {
                 _directoryName = filenameTB.Text;
                 _baseFilename = _seedFilename + "\\" + _directoryName;
+                saveFolder_TB.Text = "Saving to " + _directoryName;
+            }
+            else
+            {
+                _baseFilename = _seedFilename;
+                saveFolder_TB.Text = "Saving to root";
             }
         }
 
@@ -211,6 +217,11 @@ namespace brisk_imu
             shimmerListBox.Items.Add(_init_imu.trunk);
             shimmerListBox.Items.Add(_init_imu.arm);
             shimmerListBox.Items.Add(_init_imu.forearm);
+
+            this.config_TB.AppendText(Environment.NewLine + Environment.NewLine +
+                " Trunk: \t" + _init_imu.trunk + 
+                Environment.NewLine + " Arm: \t" + _init_imu.arm +
+                Environment.NewLine + " Forearm: \t" + _init_imu.forearm);
         }
 
         private void triggerCB_CheckedChanged(object sender, EventArgs e)
