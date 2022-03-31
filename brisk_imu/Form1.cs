@@ -6,6 +6,8 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 
+using Newtonsoft.Json;
+
 namespace brisk_imu
 {
     public partial class Form1 : Form
@@ -14,7 +16,7 @@ namespace brisk_imu
         private bool _isConnectionOK = false;
         private bool _isStarted = false;
         //private string _baseFilename = "C:\\Users\\smran\\Desktop\\Test_SynAcq\\imus_";
-        //private string _baseFilename = Path.GetDirectoryName(Application.ExecutablePath) + "\\data";
+        private string _baseExePath = Path.GetDirectoryName(Application.ExecutablePath);
         private string _baseFilename = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\briskAcquisitionData";
         private string _seedFilename = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\briskAcquisitionData";
         private string _directoryName;
@@ -36,6 +38,8 @@ namespace brisk_imu
             startBtn.Enabled = false;
 
             _imus = new ShimmerNetwork(_enabledSensors, 102.4f, chart1);
+
+            dynamic _init_imu = JsonConvert.DeserializeObject(File.ReadAllText(_baseExePath+"\\settings\\imu_configs.json"));
 
         }
 
