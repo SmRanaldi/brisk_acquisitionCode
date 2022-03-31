@@ -21,4 +21,5 @@ C:\Users\smran\OneDrive - Universita degli Studi Roma Tre\Simone\Codes\C#\brisk_
 C:\Users\smran\OneDrive - Universita degli Studi Roma Tre\Simone\Codes\C#\brisk_imu\brisk_imu\bin\Release\NationalInstruments.DAQmx.dll
 C:\Users\smran\OneDrive - Universita degli Studi Roma Tre\Simone\Codes\C#\brisk_imu\brisk_imu\bin\Release\NationalInstruments.Common.xml
 C:\Users\smran\OneDrive - Universita degli Studi Roma Tre\Simone\Codes\C#\brisk_imu\brisk_imu\bin\Release\NationalInstruments.DAQmx.xml
-C:\Users\smran\OneDrive - Universita degli Studi Roma Tre\Simone\Codes\C#\brisk_imu\brisk_imu\obj\Release\brisk_imu.exe.config
+C:\Users\smran\OneDrive - Universita degli Studi Roma Tre\Simone\Codes\C#\brisk_imu\brisk_imu\bin\Release\Newtonsoft.Json.dll
+C:\Users\smran\OneDrive - Universita degli Studi Roma Tre\Simone\Codes\C#\brisk_imu\brisk_imu\bin\Release\Newtonsoft.Json.xml

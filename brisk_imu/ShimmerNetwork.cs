@@ -11,6 +11,7 @@ using ShimmerAPI;
 using MathNet.Numerics;
 using MathNet.Numerics.LinearAlgebra;
 using System.IO;
+using System.Diagnostics;
 
 namespace brisk_imu
 {
@@ -86,6 +87,7 @@ namespace brisk_imu
             {
                 int c = 0;
                 while (c < 10) {
+                    sh.Disconnect();
                     sh.Connect();
                     if (sh.IsConnected())
                     {
@@ -94,14 +96,14 @@ namespace brisk_imu
                         sh.WriteSensors(_sensorsToEnable);
                         sh.Set3DOrientation(true);
                         sh.writeRealWorldClock(); // Explicitely sets the real world clock
-                        Console.WriteLine("Shimmer " + sh.GetDeviceName() + " connected.");
+                        Debug.WriteLine("Shimmer " + sh.GetDeviceName() + " connected.");
                         c = 10;
                         sh.StartStreaming();
                     }
                     else
                     {
                         // new Exception("Shimmer " + sh.GetDeviceName() + " failed to connect.");
-                        Console.WriteLine("Shimmer " + sh.GetDeviceName() + " failed to connect.");
+                        Debug.WriteLine("Shimmer " + sh.GetDeviceName() + " failed to connect.");
                         c++;
                     }
                 }
@@ -110,7 +112,7 @@ namespace brisk_imu
 
         public override void Start()
         {
-            Console.WriteLine("Acquisition started.");
+            Debug.WriteLine("Acquisition started.");
             _isRunning = true;
         }
 
@@ -131,7 +133,7 @@ namespace brisk_imu
                 _plotQueue[id].Clear();
             }
             _pointsInPlot = 0;
-            Console.WriteLine("Acquisition stopped.");
+            Debug.WriteLine("Acquisition stopped.");
         }
 
         public override void Disconnect()
@@ -148,7 +150,7 @@ namespace brisk_imu
             _shimmerList.Clear();
             _plotQueue.Clear();
             BaseChart.Series.Clear();
-            Console.WriteLine("All shimmers disconnected");
+            Debug.WriteLine("All shimmers disconnected");
         }
 
         public override void DumpData(string ID)
@@ -165,7 +167,7 @@ namespace brisk_imu
                     {
                         outputString += _buffer[ID][j, i].ToString() + ", ";
                     }
-                    //Console.WriteLine("!" + outputString);
+                    //Debug.WriteLine("!" + outputString);
                     writetext.WriteLine(outputString.Remove(outputString.Length - 2));
                 }
             }
@@ -175,7 +177,7 @@ namespace brisk_imu
         {
             if (ID.Length != 4)
             {
-                Console.WriteLine("Invalid name for shimmer " + ID);
+                Debug.WriteLine("Invalid name for shimmer " + ID);
                 throw new Exception("Invalid name for shimmer " + ID);
             }
             else
@@ -190,7 +192,7 @@ namespace brisk_imu
                 _plotBuffer = _basePlotBuffer * NSensors;
                 BaseChart.ChartAreas[0].AxisX.Maximum = _plotBuffer / NSensors;
 
-                Console.WriteLine("Shimmer " + ID + " added.");
+                Debug.WriteLine("Shimmer " + ID + " added.");
             }
         }
 
@@ -265,7 +267,7 @@ namespace brisk_imu
                             _bufferTimestamp[ID].Enqueue(tmpTimeStamp);
                             _plotQueue[ID].Enqueue(tmpBuff[0]);
                             _samplesInBuffer[ID]++;
-                            Console.WriteLine(_buffer[ID].RowCount.ToString());
+                            Debug.WriteLine(_buffer[ID].RowCount.ToString());
                         }
                         if (_samplesInBuffer[ID] == BufferLength)
                         {

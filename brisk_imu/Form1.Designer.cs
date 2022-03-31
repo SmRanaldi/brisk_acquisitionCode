@@ -29,7 +29,7 @@ namespace brisk_imu
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.startBtn = new System.Windows.Forms.Button();
             this.ConnectBtn = new System.Windows.Forms.Button();
@@ -54,10 +54,10 @@ namespace brisk_imu
             // 
             // chart1
             // 
-            chartArea3.AxisX.MajorGrid.Enabled = false;
-            chartArea3.AxisY.MajorGrid.Enabled = false;
-            chartArea3.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea3);
+            chartArea5.AxisX.MajorGrid.Enabled = false;
+            chartArea5.AxisY.MajorGrid.Enabled = false;
+            chartArea5.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea5);
             this.chart1.Location = new System.Drawing.Point(12, 12);
             this.chart1.Name = "chart1";
             this.chart1.Size = new System.Drawing.Size(401, 253);
@@ -119,6 +119,8 @@ namespace brisk_imu
             // SaveCheckBox
             // 
             this.SaveCheckBox.AutoSize = true;
+            this.SaveCheckBox.Checked = true;
+            this.SaveCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.SaveCheckBox.Location = new System.Drawing.Point(472, 346);
             this.SaveCheckBox.Name = "SaveCheckBox";
             this.SaveCheckBox.Size = new System.Drawing.Size(51, 17);
@@ -168,6 +170,8 @@ namespace brisk_imu
             // triggerCB
             // 
             this.triggerCB.AutoSize = true;
+            this.triggerCB.Checked = true;
+            this.triggerCB.CheckState = System.Windows.Forms.CheckState.Checked;
             this.triggerCB.Location = new System.Drawing.Point(35, 89);
             this.triggerCB.Name = "triggerCB";
             this.triggerCB.Size = new System.Drawing.Size(65, 17);

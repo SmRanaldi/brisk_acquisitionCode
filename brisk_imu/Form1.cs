@@ -97,12 +97,12 @@ namespace brisk_imu
                 {
                     if (!Directory.Exists(_baseFilename))
                     {
-                        Console.WriteLine("Creating directory " + _baseFilename);
+                        Debug.WriteLine("Creating directory " + _baseFilename);
                         Directory.CreateDirectory(_baseFilename);
                     }
                     string imuFilename = DateTime.Now.ToString().Replace("/", "").Replace(" ", "").Replace(":","");
                     imuFilename = _baseFilename + "\\imus_" + imuFilename;
-                    Console.WriteLine("Saving to path: " + imuFilename);
+                    Debug.WriteLine("Saving to path: " + imuFilename);
                     _imus.SetFilename(imuFilename);
                 }
                 _imus.Start();
@@ -214,9 +214,13 @@ namespace brisk_imu
         private void fetch_config()
         {
             dynamic _init_imu = JsonConvert.DeserializeObject(File.ReadAllText(_baseExePath + "\\settings\\imu_configs.json"));
-            shimmerListBox.Items.Add(_init_imu.trunk);
-            shimmerListBox.Items.Add(_init_imu.arm);
-            shimmerListBox.Items.Add(_init_imu.forearm);
+            string _code = _init_imu.trunk;
+            Debug.WriteLine(_code);
+            shimmerListBox.Items.Add(_code);
+            _code = _init_imu.arm;
+            shimmerListBox.Items.Add(_code);
+            _code = _init_imu.forearm;
+            shimmerListBox.Items.Add(_code);
 
             this.config_TB.AppendText(Environment.NewLine + Environment.NewLine +
                 " Trunk: \t" + _init_imu.trunk + 
