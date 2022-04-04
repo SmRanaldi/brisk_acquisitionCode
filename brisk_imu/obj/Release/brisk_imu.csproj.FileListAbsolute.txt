@@ -22,3 +22,4 @@ C:\Users\smran\OneDrive - Universita degli Studi Roma Tre\Simone\Codes\C#\brisk_
 C:\Users\smran\OneDrive - Universita degli Studi Roma Tre\Simone\Codes\C#\brisk_imu\brisk_imu\obj\Release\brisk_imu.csproj.CopyComplete
 C:\Users\smran\OneDrive - Universita degli Studi Roma Tre\Simone\Codes\C#\brisk_imu\brisk_imu\obj\Release\brisk_imu.exe
 C:\Users\smran\OneDrive - Universita degli Studi Roma Tre\Simone\Codes\C#\brisk_imu\brisk_imu\obj\Release\brisk_imu.pdb
+C:\Users\smran\OneDrive - Universita degli Studi Roma Tre\Simone\Codes\C#\brisk_imu\brisk_imu\obj\Release\brisk_imu.csproj.AssemblyReference.cache

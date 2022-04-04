@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Drawing;
+using System.Windows.Forms;
 
 using ShimmerAPI;
 using MathNet.Numerics;
@@ -82,11 +83,13 @@ namespace brisk_imu
                     _bufferTimestamp[sh].Clear();
                 }
             }
-
-            foreach (ShimmerLogAndStream32Feet sh in _shimmerList)
+            int _c = 0;
+            bool _isConnected = false;
+            while ((_c < 3) & !_isConnected)
             {
-                int c = 0;
-                while (c < 10) {
+                foreach (ShimmerLogAndStream32Feet sh in _shimmerList)
+                {
+
                     sh.Disconnect();
                     sh.Connect();
                     if (sh.IsConnected())
@@ -97,15 +100,29 @@ namespace brisk_imu
                         sh.Set3DOrientation(true);
                         sh.writeRealWorldClock(); // Explicitely sets the real world clock
                         Debug.WriteLine("Shimmer " + sh.GetDeviceName() + " connected.");
-                        c = 10;
-                        sh.StartStreaming();
                     }
                     else
                     {
-                        // new Exception("Shimmer " + sh.GetDeviceName() + " failed to connect.");
                         Debug.WriteLine("Shimmer " + sh.GetDeviceName() + " failed to connect.");
-                        c++;
+                        _c++;
                     }
+                }
+                _isConnected = true;
+                foreach (ShimmerLogAndStream32Feet sh in _shimmerList)
+                {
+                    _isConnected &= sh.IsConnected();
+                }
+            }
+
+            if (!_isConnected)
+            {
+                MessageBox.Show("Unable to connect IMUs. Restart application.");
+            }
+            else
+            {
+                foreach (ShimmerLogAndStream32Feet sh in _shimmerList)
+                {
+                    sh.StartStreaming();
                 }
             }
         }
