@@ -89,7 +89,6 @@ namespace brisk_imu
             {
                 foreach (ShimmerLogAndStream32Feet sh in _shimmerList)
                 {
-
                     sh.Disconnect();
                     sh.Connect();
                     if (sh.IsConnected())
@@ -116,7 +115,8 @@ namespace brisk_imu
 
             if (!_isConnected)
             {
-                MessageBox.Show("Unable to connect IMUs. Restart application.");
+                MessageBox.Show("Unable to connect IMUs. Restart application.\n If already restarted, power cycle the sensors.");
+                Environment.Exit(1);
             }
             else
             {
@@ -162,10 +162,11 @@ namespace brisk_imu
             foreach (ShimmerLogAndStream32Feet sh in _shimmerList)
             {
                 sh.StopStreaming();
+                sh.UICallback -= HandleShimmerDataPoints;
                 sh.Disconnect();
             }
             _shimmerList.Clear();
-            _plotQueue.Clear();
+            //_plotQueue.Clear();
             BaseChart.Series.Clear();
             Debug.WriteLine("All shimmers disconnected");
         }
@@ -173,7 +174,7 @@ namespace brisk_imu
         public override void DumpData(string ID)
         {
             string filename = _outputFilename + "_" + ID + ".csv";
-            string outputString = "";
+            string outputString;
 
             using (StreamWriter writetext = new StreamWriter(filename, append: true))
             {
@@ -184,7 +185,6 @@ namespace brisk_imu
                     {
                         outputString += _buffer[ID][j, i].ToString() + ", ";
                     }
-                    //Debug.WriteLine("!" + outputString);
                     writetext.WriteLine(outputString.Remove(outputString.Length - 2));
                 }
             }

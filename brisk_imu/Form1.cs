@@ -67,11 +67,12 @@ namespace brisk_imu
                     triggerCB.Enabled = true;
                 }
                 _isConnectionOK = false;
+                Environment.Exit(0);
 
             }
             if (_isConnectionOK)
             {
-                ConnectBtn.Text = "Disconnect";
+                ConnectBtn.Text = "Exit";
                 startBtn.Enabled = true;
                 AddBtn.Enabled = false;
                 RemoveBtn.Enabled = false;
