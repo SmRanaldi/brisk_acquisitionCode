@@ -83,6 +83,13 @@ namespace brisk_imu
                     _bufferTimestamp[sh].Clear();
                 }
             }
+            foreach (ShimmerLogAndStream32Feet sh in _shimmerList)
+            {
+                if (sh.IsConnected())
+                {
+                    sh.StopStreaming();
+                }
+            }
             int _c = 0;
             bool _isConnected = false;
             while ((_c < 3) & !_isConnected)
@@ -115,8 +122,7 @@ namespace brisk_imu
 
             if (!_isConnected)
             {
-                MessageBox.Show("Unable to connect IMUs. Restart application.\n If already restarted, power cycle the sensors.");
-                Environment.Exit(1);
+                MessageBox.Show("Unable to connect IMUs. Restart application.\nIf already restarted, power cycle the sensors.");
             }
             else
             {
@@ -161,9 +167,12 @@ namespace brisk_imu
             }
             foreach (ShimmerLogAndStream32Feet sh in _shimmerList)
             {
-                sh.StopStreaming();
-                sh.UICallback -= HandleShimmerDataPoints;
-                sh.Disconnect();
+                if (sh.IsConnected())
+                {
+                    sh.StopStreaming();
+                    sh.UICallback -= HandleShimmerDataPoints;
+                    sh.Disconnect();
+                }
             }
             _shimmerList.Clear();
             //_plotQueue.Clear();
