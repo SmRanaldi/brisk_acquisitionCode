@@ -6,6 +6,8 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 
+using Newtonsoft.Json;
+
 namespace brisk_imu
 {
     public partial class Form1 : Form
@@ -14,7 +16,7 @@ namespace brisk_imu
         private bool _isConnectionOK = false;
         private bool _isStarted = false;
         //private string _baseFilename = "C:\\Users\\smran\\Desktop\\Test_SynAcq\\imus_";
-        //private string _baseFilename = Path.GetDirectoryName(Application.ExecutablePath) + "\\data";
+        private string _baseExePath = Path.GetDirectoryName(Application.ExecutablePath);
         private string _baseFilename = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\briskAcquisitionData";
         private string _seedFilename = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\briskAcquisitionData";
         private string _directoryName;
@@ -37,6 +39,7 @@ namespace brisk_imu
 
             _imus = new ShimmerNetwork(_enabledSensors, 102.4f, chart1);
 
+            fetch_config();
         }
 
         private void ConnectBtn_Click(object sender, EventArgs e)
@@ -64,11 +67,12 @@ namespace brisk_imu
                     triggerCB.Enabled = true;
                 }
                 _isConnectionOK = false;
+                Environment.Exit(0);
 
             }
             if (_isConnectionOK)
             {
-                ConnectBtn.Text = "Disconnect";
+                ConnectBtn.Text = "Exit";
                 startBtn.Enabled = true;
                 AddBtn.Enabled = false;
                 RemoveBtn.Enabled = false;
@@ -94,12 +98,12 @@ namespace brisk_imu
                 {
                     if (!Directory.Exists(_baseFilename))
                     {
-                        Console.WriteLine("Creating directory " + _baseFilename);
+                        Debug.WriteLine("Creating directory " + _baseFilename);
                         Directory.CreateDirectory(_baseFilename);
                     }
                     string imuFilename = DateTime.Now.ToString().Replace("/", "").Replace(" ", "").Replace(":","");
                     imuFilename = _baseFilename + "\\imus_" + imuFilename;
-                    Console.WriteLine("Saving to path: " + imuFilename);
+                    Debug.WriteLine("Saving to path: " + imuFilename);
                     _imus.SetFilename(imuFilename);
                 }
                 _imus.Start();
@@ -164,6 +168,12 @@ namespace brisk_imu
             {
                 _directoryName = filenameTB.Text;
                 _baseFilename = _seedFilename + "\\" + _directoryName;
+                saveFolder_TB.Text = "Saving to " + _directoryName;
+            }
+            else
+            {
+                _baseFilename = _seedFilename;
+                saveFolder_TB.Text = "Saving to root";
             }
         }
 
@@ -200,6 +210,23 @@ namespace brisk_imu
                 sw.WriteLine("conda activate base");
                 sw.WriteLine("python " + pyFile + " " + cmdText);
             }
+        }
+
+        private void fetch_config()
+        {
+            dynamic _init_imu = JsonConvert.DeserializeObject(File.ReadAllText(_baseExePath + "\\settings\\imu_configs.json"));
+            string _code = _init_imu.trunk;
+            Debug.WriteLine(_code);
+            shimmerListBox.Items.Add(_code);
+            _code = _init_imu.arm;
+            shimmerListBox.Items.Add(_code);
+            _code = _init_imu.forearm;
+            shimmerListBox.Items.Add(_code);
+
+            this.config_TB.AppendText(Environment.NewLine + Environment.NewLine +
+                " Trunk: \t" + _init_imu.trunk + 
+                Environment.NewLine + " Arm: \t" + _init_imu.arm +
+                Environment.NewLine + " Forearm: \t" + _init_imu.forearm);
         }
 
         private void triggerCB_CheckedChanged(object sender, EventArgs e)

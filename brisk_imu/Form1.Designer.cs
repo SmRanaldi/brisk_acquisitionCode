@@ -29,7 +29,7 @@ namespace brisk_imu
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.startBtn = new System.Windows.Forms.Button();
             this.ConnectBtn = new System.Windows.Forms.Button();
@@ -45,6 +45,8 @@ namespace brisk_imu
             this.niDeviceTB = new System.Windows.Forms.TextBox();
             this.triggerGB = new System.Windows.Forms.GroupBox();
             this.niPortTB = new System.Windows.Forms.TextBox();
+            this.config_TB = new System.Windows.Forms.TextBox();
+            this.saveFolder_TB = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.imuBox.SuspendLayout();
             this.triggerGB.SuspendLayout();
@@ -52,10 +54,10 @@ namespace brisk_imu
             // 
             // chart1
             // 
-            chartArea2.AxisX.MajorGrid.Enabled = false;
-            chartArea2.AxisY.MajorGrid.Enabled = false;
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
+            chartArea5.AxisX.MajorGrid.Enabled = false;
+            chartArea5.AxisY.MajorGrid.Enabled = false;
+            chartArea5.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea5);
             this.chart1.Location = new System.Drawing.Point(12, 12);
             this.chart1.Name = "chart1";
             this.chart1.Size = new System.Drawing.Size(401, 253);
@@ -117,6 +119,8 @@ namespace brisk_imu
             // SaveCheckBox
             // 
             this.SaveCheckBox.AutoSize = true;
+            this.SaveCheckBox.Checked = true;
+            this.SaveCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.SaveCheckBox.Location = new System.Drawing.Point(472, 346);
             this.SaveCheckBox.Name = "SaveCheckBox";
             this.SaveCheckBox.Size = new System.Drawing.Size(51, 17);
@@ -166,6 +170,8 @@ namespace brisk_imu
             // triggerCB
             // 
             this.triggerCB.AutoSize = true;
+            this.triggerCB.Checked = true;
+            this.triggerCB.CheckState = System.Windows.Forms.CheckState.Checked;
             this.triggerCB.Location = new System.Drawing.Point(35, 89);
             this.triggerCB.Name = "triggerCB";
             this.triggerCB.Size = new System.Drawing.Size(65, 17);
@@ -202,11 +208,37 @@ namespace brisk_imu
             this.niPortTB.TabIndex = 13;
             this.niPortTB.Text = "1";
             // 
+            // config_TB
+            // 
+            this.config_TB.AcceptsReturn = true;
+            this.config_TB.BackColor = System.Drawing.SystemColors.Menu;
+            this.config_TB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.config_TB.Location = new System.Drawing.Point(459, 167);
+            this.config_TB.Multiline = true;
+            this.config_TB.Name = "config_TB";
+            this.config_TB.ReadOnly = true;
+            this.config_TB.Size = new System.Drawing.Size(106, 97);
+            this.config_TB.TabIndex = 14;
+            this.config_TB.Text = "IMU Config:";
+            // 
+            // saveFolder_TB
+            // 
+            this.saveFolder_TB.BackColor = System.Drawing.SystemColors.Control;
+            this.saveFolder_TB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveFolder_TB.Location = new System.Drawing.Point(13, 317);
+            this.saveFolder_TB.Name = "saveFolder_TB";
+            this.saveFolder_TB.ReadOnly = true;
+            this.saveFolder_TB.Size = new System.Drawing.Size(230, 19);
+            this.saveFolder_TB.TabIndex = 15;
+            this.saveFolder_TB.Text = "Saving to root";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(728, 375);
+            this.Controls.Add(this.saveFolder_TB);
+            this.Controls.Add(this.config_TB);
             this.Controls.Add(this.triggerGB);
             this.Controls.Add(this.imuBox);
             this.Controls.Add(this.syncBtn);
@@ -244,6 +276,8 @@ namespace brisk_imu
         private System.Windows.Forms.TextBox niDeviceTB;
         private System.Windows.Forms.GroupBox triggerGB;
         private System.Windows.Forms.TextBox niPortTB;
+        private System.Windows.Forms.TextBox config_TB;
+        private System.Windows.Forms.TextBox saveFolder_TB;
     }
 }
 

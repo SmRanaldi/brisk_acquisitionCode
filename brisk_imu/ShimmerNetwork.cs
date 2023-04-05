@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Drawing;
+using System.Windows.Forms;
 
 using ShimmerAPI;
 using MathNet.Numerics;
 using MathNet.Numerics.LinearAlgebra;
 using System.IO;
+using System.Diagnostics;
 
 namespace brisk_imu
 {
@@ -81,11 +83,20 @@ namespace brisk_imu
                     _bufferTimestamp[sh].Clear();
                 }
             }
-
             foreach (ShimmerLogAndStream32Feet sh in _shimmerList)
             {
-                int c = 0;
-                while (c < 10) {
+                if (sh.IsConnected())
+                {
+                    sh.StopStreaming();
+                }
+            }
+            int _c = 0;
+            bool _isConnected = false;
+            while ((_c < 3) & !_isConnected)
+            {
+                foreach (ShimmerLogAndStream32Feet sh in _shimmerList)
+                {
+                    if (sh.IsConnected()) sh.Disconnect();
                     sh.Connect();
                     if (sh.IsConnected())
                     {
@@ -94,23 +105,37 @@ namespace brisk_imu
                         sh.WriteSensors(_sensorsToEnable);
                         sh.Set3DOrientation(true);
                         sh.writeRealWorldClock(); // Explicitely sets the real world clock
-                        Console.WriteLine("Shimmer " + sh.GetDeviceName() + " connected.");
-                        c = 10;
-                        sh.StartStreaming();
+                        Debug.WriteLine("Shimmer " + sh.GetDeviceName() + " connected.");
                     }
                     else
                     {
-                        // new Exception("Shimmer " + sh.GetDeviceName() + " failed to connect.");
-                        Console.WriteLine("Shimmer " + sh.GetDeviceName() + " failed to connect.");
-                        c++;
+                        Debug.WriteLine("Shimmer " + sh.GetDeviceName() + " failed to connect.");
                     }
+                }
+                _isConnected = true;
+                foreach (ShimmerLogAndStream32Feet sh in _shimmerList)
+                {
+                    _isConnected &= sh.IsConnected();
+                }
+                _c++;
+            }
+
+            if (!_isConnected)
+            {
+                MessageBox.Show("Unable to connect IMUs. Restart application.\nIf already restarted, power cycle the sensors.");
+            }
+            else
+            {
+                foreach (ShimmerLogAndStream32Feet sh in _shimmerList)
+                {
+                    sh.StartStreaming();
                 }
             }
         }
 
         public override void Start()
         {
-            Console.WriteLine("Acquisition started.");
+            Debug.WriteLine("Acquisition started.");
             _isRunning = true;
         }
 
@@ -131,7 +156,7 @@ namespace brisk_imu
                 _plotQueue[id].Clear();
             }
             _pointsInPlot = 0;
-            Console.WriteLine("Acquisition stopped.");
+            Debug.WriteLine("Acquisition stopped.");
         }
 
         public override void Disconnect()
@@ -142,19 +167,23 @@ namespace brisk_imu
             }
             foreach (ShimmerLogAndStream32Feet sh in _shimmerList)
             {
-                sh.StopStreaming();
-                sh.Disconnect();
+                if (sh.IsConnected())
+                {
+                    sh.StopStreaming();
+                    sh.UICallback -= HandleShimmerDataPoints;
+                    sh.Disconnect();
+                }
             }
             _shimmerList.Clear();
-            _plotQueue.Clear();
+            //_plotQueue.Clear();
             BaseChart.Series.Clear();
-            Console.WriteLine("All shimmers disconnected");
+            Debug.WriteLine("All shimmers disconnected");
         }
 
         public override void DumpData(string ID)
         {
             string filename = _outputFilename + "_" + ID + ".csv";
-            string outputString = "";
+            string outputString;
 
             using (StreamWriter writetext = new StreamWriter(filename, append: true))
             {
@@ -165,7 +194,6 @@ namespace brisk_imu
                     {
                         outputString += _buffer[ID][j, i].ToString() + ", ";
                     }
-                    //Console.WriteLine("!" + outputString);
                     writetext.WriteLine(outputString.Remove(outputString.Length - 2));
                 }
             }
@@ -175,7 +203,7 @@ namespace brisk_imu
         {
             if (ID.Length != 4)
             {
-                Console.WriteLine("Invalid name for shimmer " + ID);
+                Debug.WriteLine("Invalid name for shimmer " + ID);
                 throw new Exception("Invalid name for shimmer " + ID);
             }
             else
@@ -190,7 +218,7 @@ namespace brisk_imu
                 _plotBuffer = _basePlotBuffer * NSensors;
                 BaseChart.ChartAreas[0].AxisX.Maximum = _plotBuffer / NSensors;
 
-                Console.WriteLine("Shimmer " + ID + " added.");
+                Debug.WriteLine("Shimmer " + ID + " added.");
             }
         }
 
@@ -265,7 +293,7 @@ namespace brisk_imu
                             _bufferTimestamp[ID].Enqueue(tmpTimeStamp);
                             _plotQueue[ID].Enqueue(tmpBuff[0]);
                             _samplesInBuffer[ID]++;
-                            Console.WriteLine(_buffer[ID].RowCount.ToString());
+                            Debug.WriteLine(_buffer[ID].RowCount.ToString());
                         }
                         if (_samplesInBuffer[ID] == BufferLength)
                         {
