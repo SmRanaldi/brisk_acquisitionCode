@@ -32,7 +32,6 @@ namespace brisk_imu
 
         // Sensors to enable
         private List<string> _shimmerToEnable = new List<string>();
-        private int _sensorsToEnable;
         private List<ShimmerLogAndStream32Feet> _shimmerList = new List<ShimmerLogAndStream32Feet>();
 
         // Output filename
@@ -96,12 +95,16 @@ namespace brisk_imu
             {
                 foreach (ShimmerLogAndStream32Feet sh in _shimmerList)
                 {
+                    
                     if (sh.IsConnected()) sh.Disconnect();
                     sh.Connect();
                     if (sh.IsConnected())
                     {
+                        sh.StopStreaming();
                         sh.UICallback += HandleShimmerDataPoints;
+                        Console.WriteLine(SamplingFrequency);
                         sh.WriteSamplingRate(SamplingFrequency);
+                        Console.WriteLine(_sensorsToEnable);
                         sh.WriteSensors(_sensorsToEnable);
                         sh.Set3DOrientation(true);
                         sh.writeRealWorldClock(); // Explicitely sets the real world clock
@@ -111,6 +114,7 @@ namespace brisk_imu
                     {
                         Debug.WriteLine("Shimmer " + sh.GetDeviceName() + " failed to connect.");
                     }
+                    
                 }
                 _isConnected = true;
                 foreach (ShimmerLogAndStream32Feet sh in _shimmerList)
@@ -233,13 +237,22 @@ namespace brisk_imu
             _outputFilename = filenameIn;
         }
 
-        public void SetSamplingRate(float frequency)
+        public void WriteSamplingRate(float frequency)
         {
-            SamplingFrequency = frequency;
             foreach(ShimmerLogAndStream32Feet sh in _shimmerList)
             {
                 sh.WriteSamplingRate(SamplingFrequency);
             }
+        }
+        public void SetSamplingRate(float frequency)
+        {
+            SamplingFrequency = frequency;
+            
+        }
+        public void SetSensors(int enabledSensors)
+        {
+            _sensorsToEnable = enabledSensors;
+
         }
 
         public bool IsEnabled(string ID)

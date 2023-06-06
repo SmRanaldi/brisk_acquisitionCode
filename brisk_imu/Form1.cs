@@ -7,6 +7,15 @@ using System.Reflection;
 using System.Windows.Forms;
 
 using Newtonsoft.Json;
+using System.Xml.Schema;
+using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
+using System.ComponentModel;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace brisk_imu
 {
@@ -25,21 +34,23 @@ namespace brisk_imu
         private int _enabledSensors = ((int)ShimmerBluetooth.SensorBitmapShimmer3.SENSOR_A_ACCEL |
             (int)ShimmerBluetooth.SensorBitmapShimmer3.SENSOR_MPU9150_GYRO |
             (int)ShimmerBluetooth.SensorBitmapShimmer3.SENSOR_LSM303DLHC_MAG);
+        
 
         // Sensors
         private ShimmerNetwork _imus;
         private NiDAQTrigger _niTrigger;
-
+        
+       
         public Form1()
         {
             InitializeComponent();
 
             startBtn.BackColor = Color.Lime;
             startBtn.Enabled = false;
-
-            _imus = new ShimmerNetwork(_enabledSensors, 102.4f, chart1);
-
+            _imus = new ShimmerNetwork(_enabledSensors,102.4f, chart1);
+            
             fetch_config();
+            
         }
 
         private void ConnectBtn_Click(object sender, EventArgs e)
@@ -78,6 +89,7 @@ namespace brisk_imu
                 RemoveBtn.Enabled = false;
                 shimmerListBox.Enabled = false;
                 triggerGB.Enabled = false;
+                button_sf.Enabled = false;
             }
             else
             {
@@ -87,12 +99,14 @@ namespace brisk_imu
                 RemoveBtn.Enabled = true;
                 shimmerListBox.Enabled = true;
                 triggerGB.Enabled = true;
+                button_sf.Enabled = true;
             }
         }
 
         private void startBtn_Click_1(object sender, EventArgs e)
         {
             if (!_isStarted)
+
             {
                 if (SaveCheckBox.Checked)
                 {
@@ -214,19 +228,21 @@ namespace brisk_imu
 
         private void fetch_config()
         {
-            dynamic _init_imu = JsonConvert.DeserializeObject(File.ReadAllText(_baseExePath + "\\settings\\imu_configs.json"));
-            string _code = _init_imu.trunk;
-            Debug.WriteLine(_code);
-            shimmerListBox.Items.Add(_code);
-            _code = _init_imu.arm;
-            shimmerListBox.Items.Add(_code);
-            _code = _init_imu.forearm;
-            shimmerListBox.Items.Add(_code);
+            dynamic _init_imu = JsonConvert.DeserializeObject(File.ReadAllText(_baseExePath + "\\settings\\imu_configs.json")); //can recall the JSON object if we need it as ex: _init_imu.arm
+            var files = JObject.Parse(File.ReadAllText(_baseExePath + "\\settings\\imu_configss.json"));
+            var recList = files.SelectTokens("IMU").ToList(); //JSON file written with a headline
+            foreach (JObject obj in recList.Children())
+            {
+                foreach (JProperty prop in obj.Children())
+                {
+                    var _key = prop.Name.ToString(); //extract all the keys of the JSON as a string
+                    var _value = prop.Value.ToString(); //extract all the value of the JSON as a string
+                    shimmerListBox.Items.Add(_value);
+                    Console.WriteLine(_key);
+                    this.config_TB.AppendText(Environment.NewLine + _key + ": \t" + _value);
+                }
 
-            this.config_TB.AppendText(Environment.NewLine + Environment.NewLine +
-                " Trunk: \t" + _init_imu.trunk + 
-                Environment.NewLine + " Arm: \t" + _init_imu.arm +
-                Environment.NewLine + " Forearm: \t" + _init_imu.forearm);
+            }
         }
 
         private void triggerCB_CheckedChanged(object sender, EventArgs e)
@@ -234,5 +250,26 @@ namespace brisk_imu
             niDeviceTB.Enabled = !triggerCB.Checked;
             niPortTB.Enabled = !triggerCB.Checked;
         }
+        
+
+        private void SaveCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chart1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Sampling_frq form3 = new Sampling_frq(_imus);
+            form3.Show();            
+
+        }
+        
+        
     }
 }
+

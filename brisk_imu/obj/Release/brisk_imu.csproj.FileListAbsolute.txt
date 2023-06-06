@@ -22,3 +22,28 @@ C:\Users\smran\OneDrive - Universita degli Studi Roma Tre\Simone\Codes\C#\brisk_
 C:\Users\smran\OneDrive - Universita degli Studi Roma Tre\Simone\Codes\C#\brisk_imu\brisk_imu\bin\Release\NationalInstruments.Common.xml
 C:\Users\smran\OneDrive - Universita degli Studi Roma Tre\Simone\Codes\C#\brisk_imu\brisk_imu\bin\Release\NationalInstruments.DAQmx.xml
 C:\Users\smran\OneDrive - Universita degli Studi Roma Tre\Simone\Codes\C#\brisk_imu\brisk_imu\obj\Release\brisk_imu.exe.config
+C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\bin\Release\brisk_imu.exe.config
+C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\bin\Release\brisk_imu.exe
+C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\bin\Release\brisk_imu.pdb
+C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\bin\Release\NationalInstruments.Common.dll
+C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\bin\Release\NationalInstruments.DAQmx.dll
+C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\bin\Release\Newtonsoft.Json.dll
+C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\bin\Release\Google.Protobuf.dll
+C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\bin\Release\InTheHand.Net.Personal.dll
+C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\bin\Release\MathNet.Numerics.xml
+C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\bin\Release\NationalInstruments.Common.xml
+C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\bin\Release\NationalInstruments.DAQmx.xml
+C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\bin\Release\Newtonsoft.Json.xml
+C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\bin\Release\Google.Protobuf.xml
+C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\bin\Release\InTheHand.Net.Personal.xml
+C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\obj\Release\brisk_imu.csproj.AssemblyReference.cache
+C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\obj\Release\brisk_imu.csproj.SuggestedBindingRedirects.cache
+C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\obj\Release\brisk_imu.Form1.resources
+C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\obj\Release\brisk_imu.AddSensorForm.resources
+C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\obj\Release\brisk_imu.Properties.Resources.resources
+C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\obj\Release\brisk_imu.csproj.GenerateResource.cache
+C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\obj\Release\brisk_imu.csproj.CoreCompileInputs.cache
+C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\obj\Release\brisk_imu.csproj.CopyComplete
+C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\obj\Release\brisk_imu.exe
+C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\obj\Release\brisk_imu.pdb
+C:\Users\ileni\source\repos\brisk_acquisitionCode1\brisk_imu\obj\Release\brisk_imu.Sampling_frq.resources
