@@ -44,7 +44,7 @@
             "102.4",
             "51.2",
             "204.8"});
-            this.comboBox1.Location = new System.Drawing.Point(260, 69);
+            this.comboBox1.Location = new System.Drawing.Point(259, 63);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(131, 24);
             this.comboBox1.TabIndex = 0;
@@ -54,7 +54,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(257, 38);
+            this.label1.Location = new System.Drawing.Point(256, 37);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(134, 16);
             this.label1.TabIndex = 1;
@@ -63,7 +63,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(46, 34);
+            this.checkBox1.Location = new System.Drawing.Point(54, 37);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(117, 20);
             this.checkBox1.TabIndex = 2;
@@ -74,7 +74,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(46, 60);
+            this.checkBox2.Location = new System.Drawing.Point(54, 63);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(96, 20);
             this.checkBox2.TabIndex = 3;
@@ -85,7 +85,7 @@
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(46, 86);
+            this.checkBox3.Location = new System.Drawing.Point(54, 89);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(116, 20);
             this.checkBox3.TabIndex = 4;

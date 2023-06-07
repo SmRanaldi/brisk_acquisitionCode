@@ -48,7 +48,7 @@ namespace brisk_imu
             startBtn.BackColor = Color.Lime;
             startBtn.Enabled = false;
             _imus = new ShimmerNetwork(_enabledSensors,102.4f, chart1);
-            
+
             fetch_config();
             
         }
@@ -265,7 +265,7 @@ namespace brisk_imu
         private void button1_Click(object sender, EventArgs e)
         {
             Sampling_frq form3 = new Sampling_frq(_imus);
-            form3.Show();            
+            form3.Show();
 
         }
         

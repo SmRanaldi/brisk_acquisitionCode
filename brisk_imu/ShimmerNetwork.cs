@@ -247,12 +247,15 @@ namespace brisk_imu
         public void SetSamplingRate(float frequency)
         {
             SamplingFrequency = frequency;
-            
         }
-        public void SetSensors(int enabledSensors)
+       
+        public void SetSensors(int A, int G, int M)
         {
-            _sensorsToEnable = enabledSensors;
-
+            _sensorsToEnable = 0;
+            _sensorsToEnable |= A * (int)ShimmerBluetooth.SensorBitmapShimmer3.SENSOR_A_ACCEL;
+            _sensorsToEnable |= G * (int)ShimmerBluetooth.SensorBitmapShimmer3.SENSOR_MPU9150_GYRO;
+            _sensorsToEnable |= M * (int)ShimmerBluetooth.SensorBitmapShimmer3.SENSOR_LSM303DLHC_MAG;
+            //Console.WriteLine(_sensorsToEnable);
         }
 
         public bool IsEnabled(string ID)
