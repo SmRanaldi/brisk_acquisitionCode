@@ -52,7 +52,7 @@ namespace brisk_imu
             UpdateThread = new Thread(UpdatePlotFunction);
             UpdateThread.IsBackground = true;
             UpdateThread.Start();
-            BaseChart.ChartAreas[0].AxisY.Maximum = 30;
+            BaseChart.ChartAreas[0].AxisY.Maximum = 30; //da adattare a seconda del sensore scelto
             BaseChart.ChartAreas[0].AxisY.Minimum = -30;
         }
 
