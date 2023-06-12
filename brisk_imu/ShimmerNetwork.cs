@@ -262,8 +262,8 @@ namespace brisk_imu
             if ( T_sensor == 0 ) 
             { 
                 _columnselected |= T_sensor + axisx * 0;
-            _columnselected |= T_sensor + axisy * 1;
-            _columnselected |= T_sensor + axisz * 2;
+                _columnselected |= T_sensor + axisy * 1;
+                _columnselected |= T_sensor + axisz * 2;
             }
             else if (T_sensor == 1)
             {
@@ -308,6 +308,7 @@ namespace brisk_imu
             {
                 ObjectCluster oC = (ObjectCluster)eventArgs.getObject();
                 List<double> currentData = oC.GetData();
+                double maxYValue = double.MinValue; // Initialize with a very low value
                 //tmpTimeStamp = (long)(DateTime.Now.Ticks / 10000); // From ticks to milliseconds
                 if (_isRunning)
                 {
@@ -318,10 +319,13 @@ namespace brisk_imu
                         tmpTimeStamp = oC.GetData(ShimmerConfiguration.SignalNames.SYSTEM_TIMESTAMP, "CAL").Data; // Get the timestamp from shimmer
                         int i = 4;
                         while (i < lenCurrentData)
+                          
                         {
                             tmpBuff.Add(currentData[i]);
-                            i += 2;
+                            i += 2; 
+                            
                         }
+                
 
                         if (_samplesInBuffer[ID] == 0)
                         {
@@ -364,17 +368,20 @@ namespace brisk_imu
         {
             double pointToPlot;
             string ID;
+            double maxValue = double.MinValue;
             while (true)
             {
                 if (_isRunning)
                 {
+
                     foreach (var sh in _shimmerToEnable)
                     {
                         ID = sh;
                         if (_plotQueue[ID].Count > 0)
                         {
                             pointToPlot = _plotQueue[ID].Dequeue();
-
+                            //trovo il valore maggiore ASSOLUTO
+                            maxValue = Math.Max(maxValue, Math.Abs(pointToPlot));
                             BaseChart.Invoke(new Action(delegate
 
                             {
@@ -388,7 +395,14 @@ namespace brisk_imu
                                     BaseChart.Series[sh].Points.RemoveAt(0);
                                     BaseChart.Series[sh].Points.Add(pointToPlot);
                                 }
-                               
+                                // Cambia dinamicamente il valore dell'asse Y
+                                double truncatedMaxValue = Math.Truncate(maxValue * 100) / 100; // Tronco alla seconda cifra, se voglio troncare alla terza uso 1000 e ###
+                                BaseChart.ChartAreas[0].AxisY.Maximum = truncatedMaxValue;
+                                BaseChart.ChartAreas[0].AxisY.Minimum = -truncatedMaxValue;
+
+                                // per visualizzare il valore troncato
+                                BaseChart.ChartAreas[0].AxisY.LabelStyle.Format = "0.##";
+
                             }));
                         }
                     }

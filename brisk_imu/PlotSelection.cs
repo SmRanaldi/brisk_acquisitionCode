@@ -53,16 +53,45 @@ namespace brisk_imu
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (checkBox1.Checked)
+            {                
+              checkBox2.Enabled = false;
+              checkBox3.Enabled = false;  
+            }
+            else {
+                checkBox2.Enabled = true;
+                checkBox3.Enabled = true;
+            }
+            
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
+            if (checkBox2.Checked)
+            {
 
+                checkBox1.Enabled = false;
+                checkBox3.Enabled = false;
+            }
+            else
+            {
+                checkBox1.Enabled = true;
+                checkBox3.Enabled = true;
+            }
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
+            if (checkBox3.Checked)
+            {
+                checkBox2.Enabled = false;
+                checkBox1.Enabled = false;
+            }
+            else
+            {
+                checkBox2.Enabled = true;
+                checkBox1.Enabled = true;
+            }
 
         }
         private void button1_Click(object sender, EventArgs e)

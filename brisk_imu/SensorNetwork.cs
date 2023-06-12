@@ -30,7 +30,7 @@ namespace brisk_imu
 
         public float SamplingFrequency { get; set; }
         public int _sensorsToEnable { get; set; }
-        public int _columnselected { get; set; }
+        
 
         public Thread UpdateThread { get; set; }
         public Chart BaseChart { get; set; }
