@@ -47,3 +47,4 @@ C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\obj\Release\brisk_i
 C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\obj\Release\brisk_imu.exe
 C:\Users\ileni\Source\Repos\brisk_acquisitionCode1\brisk_imu\obj\Release\brisk_imu.pdb
 C:\Users\ileni\source\repos\brisk_acquisitionCode1\brisk_imu\obj\Release\brisk_imu.Sampling_frq.resources
+C:\Users\ileni\source\repos\brisk_acquisitionCode1\brisk_imu\obj\Release\brisk_imu.PlotSelection.resources

@@ -90,6 +90,7 @@ namespace brisk_imu
                 shimmerListBox.Enabled = false;
                 triggerGB.Enabled = false;
                 button_sf.Enabled = false;
+                Plot_btn.Enabled = false;
             }
             else
             {
@@ -268,8 +269,12 @@ namespace brisk_imu
             form3.Show();
 
         }
-        
-        
+      
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            PlotSelection form4 = new PlotSelection(_imus);
+            form4.Show();
+        }
     }
 }
 

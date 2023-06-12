@@ -82,5 +82,53 @@ namespace brisk_imu.Properties {
                 this["_SetSensor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SelectedPlot {
+            get {
+                return ((string)(this["SelectedPlot"]));
+            }
+            set {
+                this["SelectedPlot"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CheckboxStatusx {
+            get {
+                return ((bool)(this["CheckboxStatusx"]));
+            }
+            set {
+                this["CheckboxStatusx"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CheckboxStatusy {
+            get {
+                return ((bool)(this["CheckboxStatusy"]));
+            }
+            set {
+                this["CheckboxStatusy"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CheckboxStatusz {
+            get {
+                return ((bool)(this["CheckboxStatusz"]));
+            }
+            set {
+                this["CheckboxStatusz"] = value;
+            }
+        }
     }
 }

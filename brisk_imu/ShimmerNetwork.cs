@@ -29,6 +29,7 @@ namespace brisk_imu
         private int _pointsInPlot = 0;
         private int _basePlotBuffer = 200;
         private int _plotBuffer = 0;
+        private int _columnselected = 0;
 
         // Sensors to enable
         private List<string> _shimmerToEnable = new List<string>();
@@ -102,9 +103,7 @@ namespace brisk_imu
                     {
                         sh.StopStreaming();
                         sh.UICallback += HandleShimmerDataPoints;
-                        Console.WriteLine(SamplingFrequency);
                         sh.WriteSamplingRate(SamplingFrequency);
-                        Console.WriteLine(_sensorsToEnable);
                         sh.WriteSensors(_sensorsToEnable);
                         sh.Set3DOrientation(true);
                         sh.writeRealWorldClock(); // Explicitely sets the real world clock
@@ -255,9 +254,34 @@ namespace brisk_imu
             _sensorsToEnable |= A * (int)ShimmerBluetooth.SensorBitmapShimmer3.SENSOR_A_ACCEL;
             _sensorsToEnable |= G * (int)ShimmerBluetooth.SensorBitmapShimmer3.SENSOR_MPU9150_GYRO;
             _sensorsToEnable |= M * (int)ShimmerBluetooth.SensorBitmapShimmer3.SENSOR_LSM303DLHC_MAG;
-            //Console.WriteLine(_sensorsToEnable);
+            
         }
+        public void Plotcomponent(int T_sensor, int axisx, int axisy, int axisz)
+        {
+            _columnselected = 0;
+            if ( T_sensor == 0 ) 
+            { 
+                _columnselected |= T_sensor + axisx * 0;
+            _columnselected |= T_sensor + axisy * 1;
+            _columnselected |= T_sensor + axisz * 2;
+            }
+            else if (T_sensor == 1)
+            {
+                _columnselected |= T_sensor + axisx * 2;
+                _columnselected |= T_sensor + axisy * 3;
+                _columnselected |= T_sensor + axisz * 4;
+            }
+            else
+            {
+                if (T_sensor == 0)
+                {
+                    _columnselected |= T_sensor + axisx * 4;
+                    _columnselected |= T_sensor + axisy * 5;
+                    _columnselected |= T_sensor + axisz * 6;
+                }
+            }
 
+        }
         public bool IsEnabled(string ID)
         {
             bool isIDEnabled = false;
@@ -269,6 +293,8 @@ namespace brisk_imu
 
             return isIDEnabled;
         }
+
+       
 
         void HandleShimmerDataPoints(object sender, EventArgs e)
         {
@@ -296,20 +322,23 @@ namespace brisk_imu
                             tmpBuff.Add(currentData[i]);
                             i += 2;
                         }
+
                         if (_samplesInBuffer[ID] == 0)
                         {
                             _buffer.Add(ID, Matrix<double>.Build.DenseOfColumnArrays(tmpBuff.ToArray()));
                             _bufferTimestamp[ID].Enqueue(tmpTimeStamp);
                             _plotQueue[ID].Enqueue(tmpBuff[0]);
                             _samplesInBuffer[ID]++;
+
                         }
                         else
                         {
                             _buffer[ID] = _buffer[ID].Append(Matrix<double>.Build.DenseOfColumnArrays(tmpBuff.ToArray()));
                             _bufferTimestamp[ID].Enqueue(tmpTimeStamp);
-                            _plotQueue[ID].Enqueue(tmpBuff[0]);
+                            _plotQueue[ID].Enqueue(tmpBuff[_columnselected]); //qui scelgo i dati da plottare conto da 0 come componente x dell'accelerometro
                             _samplesInBuffer[ID]++;
                             Debug.WriteLine(_buffer[ID].RowCount.ToString());
+                           
                         }
                         if (_samplesInBuffer[ID] == BufferLength)
                         {
@@ -324,6 +353,7 @@ namespace brisk_imu
                             }
                             _samplesInBuffer[ID] = 0;
                         }
+
                     }
                 }
             }
@@ -344,7 +374,9 @@ namespace brisk_imu
                         if (_plotQueue[ID].Count > 0)
                         {
                             pointToPlot = _plotQueue[ID].Dequeue();
+
                             BaseChart.Invoke(new Action(delegate
+
                             {
                                 if (_pointsInPlot < _plotBuffer)
                                 {
@@ -356,6 +388,7 @@ namespace brisk_imu
                                     BaseChart.Series[sh].Points.RemoveAt(0);
                                     BaseChart.Series[sh].Points.Add(pointToPlot);
                                 }
+                               
                             }));
                         }
                     }

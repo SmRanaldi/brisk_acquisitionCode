@@ -17,5 +17,17 @@
     <Setting Name="_SetSensor" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">224</Value>
     </Setting>
+    <Setting Name="SelectedPlot" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CheckboxStatusx" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CheckboxStatusy" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CheckboxStatusz" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

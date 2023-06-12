@@ -29,7 +29,7 @@ namespace brisk_imu
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.startBtn = new System.Windows.Forms.Button();
             this.ConnectBtn = new System.Windows.Forms.Button();
@@ -48,6 +48,7 @@ namespace brisk_imu
             this.config_TB = new System.Windows.Forms.TextBox();
             this.saveFolder_TB = new System.Windows.Forms.TextBox();
             this.button_sf = new System.Windows.Forms.Button();
+            this.Plot_btn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.imuBox.SuspendLayout();
             this.triggerGB.SuspendLayout();
@@ -55,10 +56,10 @@ namespace brisk_imu
             // 
             // chart1
             // 
-            chartArea1.AxisX.MajorGrid.Enabled = false;
-            chartArea1.AxisY.MajorGrid.Enabled = false;
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
+            chartArea2.AxisX.MajorGrid.Enabled = false;
+            chartArea2.AxisY.MajorGrid.Enabled = false;
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
             this.chart1.Location = new System.Drawing.Point(16, 15);
             this.chart1.Margin = new System.Windows.Forms.Padding(4);
             this.chart1.Name = "chart1";
@@ -262,11 +263,22 @@ namespace brisk_imu
             this.button_sf.UseVisualStyleBackColor = true;
             this.button_sf.Click += new System.EventHandler(this.button1_Click);
             // 
+            // Plot_btn
+            // 
+            this.Plot_btn.Location = new System.Drawing.Point(424, 333);
+            this.Plot_btn.Name = "Plot_btn";
+            this.Plot_btn.Size = new System.Drawing.Size(127, 33);
+            this.Plot_btn.TabIndex = 18;
+            this.Plot_btn.Text = "Plot visualization";
+            this.Plot_btn.UseVisualStyleBackColor = true;
+            this.Plot_btn.Click += new System.EventHandler(this.button1_Click_2);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(971, 462);
+            this.Controls.Add(this.Plot_btn);
             this.Controls.Add(this.button_sf);
             this.Controls.Add(this.saveFolder_TB);
             this.Controls.Add(this.config_TB);
@@ -311,6 +323,7 @@ namespace brisk_imu
         private System.Windows.Forms.TextBox config_TB;
         private System.Windows.Forms.TextBox saveFolder_TB;
         private System.Windows.Forms.Button button_sf;
+        private System.Windows.Forms.Button Plot_btn;
     }
 }
 
