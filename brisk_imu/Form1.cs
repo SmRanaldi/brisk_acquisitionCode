@@ -16,6 +16,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace brisk_imu
 {
@@ -39,8 +40,9 @@ namespace brisk_imu
         // Sensors
         private ShimmerNetwork _imus;
         private NiDAQTrigger _niTrigger;
-        
        
+
+
         public Form1()
         {
             InitializeComponent();
@@ -69,6 +71,7 @@ namespace brisk_imu
                     _niTrigger.Initialize();
                 }
                 _isConnectionOK = true;
+                
             }
             else
             {
@@ -78,12 +81,19 @@ namespace brisk_imu
                     triggerCB.Enabled = true;
                 }
                 _isConnectionOK = false;
-                Environment.Exit(0);
+               
+                ResetApplication();
+                ReloadConfig();
 
             }
+            UpdateUIState(); 
+
+        }
+        private void UpdateUIState()
+        {
             if (_isConnectionOK)
             {
-                ConnectBtn.Text = "Exit";
+                ConnectBtn.Text = "Reset";
                 startBtn.Enabled = true;
                 AddBtn.Enabled = false;
                 RemoveBtn.Enabled = false;
@@ -101,9 +111,49 @@ namespace brisk_imu
                 shimmerListBox.Enabled = true;
                 triggerGB.Enabled = true;
                 button_sf.Enabled = true;
+                Plot_btn.Enabled = true;
             }
         }
+        private void ResetApplication()
+        {
+            // Reimposta lo stato iniziale dell'applicazione
+            _isStarted = false;
+            startBtn.BackColor = Color.Lime;
+            startBtn.Text = "Start";
+            ConnectBtn.Enabled = true;
+            updateFilenameButton.Enabled = true;
+            filenameTB.Enabled = true;
+            SaveCheckBox.Enabled = true;
 
+            // se rimuovo poi non mi carica più i nomi, vedere se si riesce a caricare la lista imu.configss
+            
+            RemoveBtn.Enabled = false;
+            AddBtn.Enabled = true;
+            shimmerListBox.Enabled = true;
+            triggerGB.Enabled = true;
+            button_sf.Enabled = true;
+            Plot_btn.Enabled = true;
+            ConnectBtn.Text = "Connect";
+
+            _imus.ClearAllSensors();
+        }
+        private void ReloadConfig()
+        {
+            shimmerListBox.Items.Clear();
+                // Carica i dati dal file "imu.configss"
+                var files = JObject.Parse(File.ReadAllText(_baseExePath + "\\settings\\imu_configss.json"));
+                var recList = files.SelectTokens("IMU").ToList();
+
+                foreach (JObject obj in recList.Children())
+                {
+                    foreach (JProperty prop in obj.Children())
+                    {
+                        var _value = prop.Value.ToString();
+                        shimmerListBox.Items.Add(_value);
+                    }
+                }
+            
+            }
         private void startBtn_Click_1(object sender, EventArgs e)
         {
             if (!_isStarted)
@@ -275,6 +325,7 @@ namespace brisk_imu
             PlotSelection form4 = new PlotSelection(_imus);
             form4.Show();
         }
+
     }
 }
 

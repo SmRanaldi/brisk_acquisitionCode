@@ -29,7 +29,7 @@ namespace brisk_imu
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.startBtn = new System.Windows.Forms.Button();
             this.ConnectBtn = new System.Windows.Forms.Button();
@@ -56,10 +56,10 @@ namespace brisk_imu
             // 
             // chart1
             // 
-            chartArea2.AxisX.MajorGrid.Enabled = false;
-            chartArea2.AxisY.MajorGrid.Enabled = false;
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
+            chartArea1.AxisX.MajorGrid.Enabled = false;
+            chartArea1.AxisY.MajorGrid.Enabled = false;
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.Location = new System.Drawing.Point(16, 15);
             this.chart1.Margin = new System.Windows.Forms.Padding(4);
             this.chart1.Name = "chart1";
@@ -72,10 +72,10 @@ namespace brisk_imu
             // 
             this.startBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(255)))), ((int)(((byte)(64)))));
             this.startBtn.Enabled = false;
-            this.startBtn.Location = new System.Drawing.Point(812, 401);
+            this.startBtn.Location = new System.Drawing.Point(793, 382);
             this.startBtn.Margin = new System.Windows.Forms.Padding(4);
             this.startBtn.Name = "startBtn";
-            this.startBtn.Size = new System.Drawing.Size(143, 46);
+            this.startBtn.Size = new System.Drawing.Size(143, 71);
             this.startBtn.TabIndex = 1;
             this.startBtn.Text = "Start";
             this.startBtn.UseVisualStyleBackColor = false;
@@ -83,7 +83,7 @@ namespace brisk_imu
             // 
             // ConnectBtn
             // 
-            this.ConnectBtn.Location = new System.Drawing.Point(705, 401);
+            this.ConnectBtn.Location = new System.Drawing.Point(631, 398);
             this.ConnectBtn.Margin = new System.Windows.Forms.Padding(4);
             this.ConnectBtn.Name = "ConnectBtn";
             this.ConnectBtn.Size = new System.Drawing.Size(99, 46);
@@ -255,7 +255,7 @@ namespace brisk_imu
             // 
             // button_sf
             // 
-            this.button_sf.Location = new System.Drawing.Point(617, 328);
+            this.button_sf.Location = new System.Drawing.Point(617, 331);
             this.button_sf.Name = "button_sf";
             this.button_sf.Size = new System.Drawing.Size(127, 34);
             this.button_sf.TabIndex = 17;
